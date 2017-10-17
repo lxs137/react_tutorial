@@ -1,9 +1,14 @@
-##  ReactJS 教程
+#  ReactJS 教程
 
 [TOC]
+## React简介
+* 轻量：MVC中的View层框架
+* 高效：构建虚拟DOM，通过DOM Diff算法，尽可能少的更新界面
+* 方便的JSX语法，不同于Angular与Vue在HTML中添加模板语言，便于记忆，较为灵活
+* React与Redux：react本质上只是一个View层的框架，对于大型的应用来说还需要一层数据层上的管理方法，Redux就是一种受Flux数据流模式启发而产生的数据流框架，在React可以负责对state的管理。
+![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/front/md_resource/8.png)
 
-
-### 1. 环境配置
+## 1. 环境配置
 ### 1.1 安装Node与npm
 Node：https://nodejs.org/en/download/
 Node安装完成之后自带npm
@@ -58,7 +63,7 @@ npm run build
 * Sublime Text 3
 * WebStorm
 
-### 2. React基础特性
+## 2. React基础特性
 ### 2.1 [JSX语法](https://reactjs.org/docs/introducing-jsx.html)
 对Javascript语法的拓展，添加了对"React DOM"的描述的相关语法糖：
 ![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/front/md_resource/4.png)
@@ -133,6 +138,7 @@ this.setState((prevState) => ({
     counter: prevState.count + 1
  }));
 ```
+* Component是一个类，可以有他自己的成员变量，对于一些会发生变化，却不会影响到Component的渲染结果的变量，将其设为类的成员变量，以避免这些变量的修改引起组件重绘
 
 ### 2.5 [Component生命周期](https://reactjs.org/docs/react-component.html#the-component-lifecycle)
 * 所有Component都有一系列可以被override的生命周期方法，这些方法会在一个Component的渲染进程中被反复依次调用。
@@ -196,3 +202,5 @@ import { Button } from 'antd'
 （PS：Promise是一种处理异步操作的组件，提供了各种规范化的，易于使用的异步操作API，如果对Promise不了解，请先阅读["JavaScript Promise迷你书"](http://liubin.org/promises-book/)和["关于promises，你理解了多少？"](http://t.cn/RLxFIB3))
 
 ### 3.3 DataList Component
+
+![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/front/md_resource/7.png)
