@@ -36,7 +36,7 @@ cd my-app
 	* src/App.js为应用的主界面；
 	* src/registerServiceWorker.js提供在生产环境下进行资源缓存的功能：
 
-![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/md_resource/3.png)
+![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/front/md_resource/3.png)
 
 * 使用预设命令自动开发，调试，打包JavaScript源码(webpack)
 ```bash
@@ -48,7 +48,7 @@ npm run build
 
 * 查看package.json文件中的scripts项，发现"npm run start" 和 "npm run build"命令实质上是调用了模块react-scripts模块的相应预设命令：
 
-![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/md_resource/2.png)
+![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/front/md_resource/2.png)
 
 * react-scripts模块中存有预设的webpack配置，如果想要修改默认的webpack配置文件，就比较麻烦，具体操作请参照[Customize Webpack Config In Create-React-APP](https://daveceddia.com/customize-create-react-app-webpack-without-ejecting/)或者使用[react-app-rewired](https://github.com/timarney/react-app-rewired)
 
@@ -61,20 +61,20 @@ npm run build
 ### 2. React基础特性
 ### 2.1 [JSX语法](https://reactjs.org/docs/introducing-jsx.html)
 对Javascript语法的拓展，添加了对"React DOM"的描述的相关语法糖：
-![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/md_resource/4.png)
+![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/front/md_resource/4.png)
 
 特点：
 * 遇到 XML 标签 <...>，以 XML 规则解析；遇到代码块 {...}，就用 JavaScript 规则解析；
 * 在JSX中，XML可以理解为是创建"React DOM"对象的语法糖；在编译之后呢，会被转化为 React.createElement() 函数的调用
 
-![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/md_resource/5.png)
+![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/front/md_resource/5.png)
 
 * JSX使用"驼峰命名法"来定义属性的名称，而不是使用传统HTML的属性名称；如：class用 className代替
 * "React DOM"在渲染之前默认会过滤所有传入的值。它可以确保应用不会被注入攻击
 
 ### 2.2 虚拟DOM
 * 抽象性：将“前端JS如何根据业务逻辑组织页面”和“如何根据页面组织渲染出真正的可供展示的页面”分割开来。
-![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/md_resource/6.png)
+![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/front/md_resource/6.png)
 
 * 高性能：当页面的状态变更时，用新生成的React对象树去和旧的React对象树进行对比，记录这两棵树差异。然后把这些差异应用，渲染在真正的 DOM 树上。
 
@@ -151,8 +151,37 @@ this.setState((prevState) => ({
 * 当渲染出现问题时，调用componentDidCatch()函数，进行错误处理
 
 ## 3 Todo Example
+首先，使用create-react-app创建应用
 ### 3.1 依赖的第三方库
-* [Ant Design](https://ant.design/index-cn) (UI设计框架，类似Bootstrap，但Ant Design与React结合的更好)
-`npm install antd --save`
 * [axios](https://github.com/axios/axios) (浏览器端的HTTP库，类似ajax中的$)
-`npm install whatwg-fetch --save`
+`npm install axios --save`
+
+### 3.1 使用[Ant Design](https://ant.design/index-cn)
+
+* Ant Design：UI设计框架，类似Bootstrap，但Ant Design与React结合的更好
+* 如何在react中使用：参考官方的例子([在create-react-app中使用](https://ant.design/docs/react/use-with-create-react-app-cn))
+
+1. 安装相应依赖
+```bash
+npm install antd react-app-rewired babel-plugin-import --save
+```
+2. 修改package.json
+```javascript
+"scripts": {
+       "start": "react-app-rewired start",
+       "build": "react-app-rewired build",
+       "test": "react-app-rewired test --env=jsdom",
+}
+```
+3. 在应用根目录创建config-overrides.js
+```javascript
+const { injectBabelPlugin } = require('react-app-rewired');
+module.exports = function override(config, env) {
+		config = injectBabelPlugin(['import', { libraryName: 'antd', style: 'css' }], config);
+		return config;
+};
+```
+4. 在需要的Component中import相应的Ant Design组件
+`import { Button } from 'antd'`
+
+3.2 

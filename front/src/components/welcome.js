@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'antd'
 
 class Welcome extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Welcome extends Component {
   render() {
     return (
       <div>
+        <Button>Hello</Button>
         <h1>Hello, {this.props.name}!</h1>
         <h2>It is {this.state.time.toLocaleTimeString()}.</h2>
       </div>
