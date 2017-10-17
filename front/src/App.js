@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './styles/App.css';
 import { Layout, Menu, Icon } from 'antd';
+import DataList from './components/data_list';
+import './styles/App.css';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -19,8 +20,8 @@ class App extends Component {
           </Menu>
         </Sider>
         <Layout style={{ marginLeft: 200 }}>
-          <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+            <DataList></DataList>
           </Content>
         </Layout>
       </Layout>

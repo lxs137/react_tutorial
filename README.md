@@ -114,7 +114,9 @@ class Welcome extends React.Component {
 ```javascript
 // 错误
 this.state.time = new Date();
-// 正确，如果state还有其他属性，此时不会受影响，只更新time属性
+// 正确，
+// setState会将传入的obj与原state合并，这意味着如果state还有其他属性，此时不会受影响，只更新time属性
+// 但是这种合并的深度仅为1层，如果原state有个属性的值为obj，则不会比较、合并obj的属性值
 this.setState({
 	time: new Date()
 });
@@ -150,21 +152,24 @@ this.setState((prevState) => ({
 	*  componentWillUnmount()
 * 当渲染出现问题时，调用componentDidCatch()函数，进行错误处理
 
-## 3 Todo Example
-首先，使用create-react-app创建应用
-### 3.1 依赖的第三方库
-* [axios](https://github.com/axios/axios) (浏览器端的HTTP库，类似ajax中的$)
-`npm install axios --save`
+## 3 User List Example
+* 使用React开发一个简单的用户管理应用界面，包含用户的添加，删除，修改，查询功能。(PS：配套的后端采用node.js的[express](http://www.expressjs.com.cn/)框架开发，本教程暂不做讨论)
+* 后台服务器使用`npm start`即可开启，默认开启在本地的4000端口
+* 首先，使用create-react-app创建应用
+```bash
+create-react-app example-app
+```
 
 ### 3.1 使用[Ant Design](https://ant.design/index-cn)
 
 * Ant Design：UI设计框架，类似Bootstrap，但Ant Design与React结合的更好
 * 如何在react中使用：参考官方的例子([在create-react-app中使用](https://ant.design/docs/react/use-with-create-react-app-cn))
-
 1. 安装相应依赖
 ```bash
 npm install antd react-app-rewired babel-plugin-import --save
 ```
+PS: 使用create-app-rewired和babel-plugin-import只是为了实现CSS样式的按需加载，使得只有被用到的Ant Design组件样式被打包到最后的应用中，加快APP加载速度，非必需。
+
 2. 修改package.json
 ```javascript
 "scripts": {
@@ -182,6 +187,12 @@ module.exports = function override(config, env) {
 };
 ```
 4. 在需要的Component中import相应的Ant Design组件
-`import { Button } from 'antd'`
+```javascript
+import { Button } from 'antd'
+```
 
-3.2 
+### 3.2 使用[axios](https://github.com/axios/axios)发起HTTP请求
+* axios是一个基于Promise的浏览器HTTP客户端(兼容IE8)
+（PS：Promise是一种处理异步操作的组件，提供了各种规范化的，易于使用的异步操作API，如果对Promise不了解，请先阅读["JavaScript Promise迷你书"](http://liubin.org/promises-book/)和["关于promises，你理解了多少？"](http://t.cn/RLxFIB3))
+
+### 3.3 DataList Component
