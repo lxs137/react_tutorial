@@ -6,7 +6,7 @@
 * 高效：构建虚拟DOM，通过DOM Diff算法，尽可能少的更新界面
 * 方便的JSX语法，不同于Angular与Vue在HTML中添加模板语言，便于记忆，较为灵活
 * React与Redux：react本质上只是一个View层的框架，对于大型的应用来说还需要一层数据层上的管理方法，Redux就是一种受Flux数据流模式启发而产生的数据流框架，在React可以负责对state的管理。
-![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/front/md_resource/8.png)
+![](http://upload-images.jianshu.io/upload_images/35008-614667368b68ec5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## 1. 环境配置
 ### 1.1 安装Node与npm
@@ -203,4 +203,4 @@ import { Button } from 'antd'
 
 ### 3.3 DataList Component
 
-![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/front/md_resource/7.png)
+![](http://raw.githubusercontent.com/lxs137/react_tutorial/master/front/md_resource/7.png)
