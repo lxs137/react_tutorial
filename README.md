@@ -50,7 +50,7 @@ npm run build
 
 ![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/md_resource/2.png)
 
-* react-scripts模块中存有预设的webpack配置，如果想要修改默认的webpack配置文件，就比较麻烦，具体操作请参照[Customize Webpack Config In Create-React-APP](https://daveceddia.com/customize-create-react-app-webpack-without-ejecting/)
+* react-scripts模块中存有预设的webpack配置，如果想要修改默认的webpack配置文件，就比较麻烦，具体操作请参照[Customize Webpack Config In Create-React-APP](https://daveceddia.com/customize-create-react-app-webpack-without-ejecting/)或者使用[react-app-rewired](https://github.com/timarney/react-app-rewired)
 
 ### 1.3 Text editor
 * Visual Studio Code
@@ -59,7 +59,7 @@ npm run build
 * WebStorm
 
 ### 2. React基础特性
-### 2.1 JSX语法
+### 2.1 [JSX语法](https://reactjs.org/docs/introducing-jsx.html)
 对Javascript语法的拓展，添加了对"React DOM"的描述的相关语法糖：
 ![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/md_resource/4.png)
 
@@ -71,12 +71,14 @@ npm run build
 
 * JSX使用"驼峰命名法"来定义属性的名称，而不是使用传统HTML的属性名称；如：class用 className代替
 * "React DOM"在渲染之前默认会过滤所有传入的值。它可以确保应用不会被注入攻击
+
 ### 2.2 虚拟DOM
 * 抽象性：将“前端JS如何根据业务逻辑组织页面”和“如何根据页面组织渲染出真正的可供展示的页面”分割开来。
 ![](https://raw.githubusercontent.com/lxs137/react_tutorial/master/md_resource/6.png)
 
 * 高性能：当页面的状态变更时，用新生成的React对象树去和旧的React对象树进行对比，记录这两棵树差异。然后把这些差异应用，渲染在真正的 DOM 树上。
-### 2.3 Component
+
+### 2.3 [Component](https://reactjs.org/docs/react-component.html)
 * 组件是一个独立的，可重用的页面功能模块。接收输入(props)，渲染出React Element
 * 每个组件的render函数被调用渲染时，也会触发子组件的render方法渲染子组件
 * 组件render的返回值中，顶层标签只能有一个
@@ -85,7 +87,9 @@ npm run build
 class Welcome extends React.Component {
 	constructor(props) {
     	super(props);
+        // 设定state初始值
         this.state = { time: new Date() };
+        // 每隔2000ms，更新一次state值，render函数被调用，组件重绘
         setInterval(() => {
         	this.setState({
             	time: new Date()
@@ -102,7 +106,8 @@ class Welcome extends React.Component {
 	}
 }
 ```
-### 2.4 props和state
+
+### 2.4 [props和state](https://reactjs.org/docs/state-and-lifecycle.html)
 * props是Component的输入参数，为只读，不允许在Component的代码中修改其props的值，一般是由上层Component传入。
 * state一般也只能在Component的构造函数中设置初始化值，每当state的值发生变化，Component的render函数会被调用，重新渲染生成React element。
 * state的值不能直接使用“=”更新，需要使用setState函数
@@ -119,12 +124,35 @@ this.setState({
 // 如果你需要state中的一个属性具有自增的特性
 // 错误的做法
 this.setState({
-    counter: this.state.counter + 1,
+    counter: this.state.count + 1,
  });
 // 正确的做法
 this.setState((prevState) => ({
-    counter: prevState.counter + 1
+    counter: prevState.count + 1
  }));
 ```
-### 2.5 Component生命周期
 
+### 2.5 [Component生命周期](https://reactjs.org/docs/react-component.html#the-component-lifecycle)
+* 所有Component都有一系列可以被override的生命周期方法，这些方法会在一个Component的渲染进程中被反复依次调用。
+* Component的生命周期主要分为Mount，Update，Unmount三个大的阶段
+* Mount：Component第一次被创建，将组件相应React Element绘制到真正的DOM上
+	*  constructor()
+	*  componentWillMount()
+	*  render()
+	*  componentDidMount()
+* Update：Component的props或者state更新时，组件重新绘制，DOM不会被移除
+	*  componentWillReceiveProps()
+	*  shouldComponentUpdate()
+	*  componentWillUpdate()
+	*  render()
+	*  componentDidUpdate()
+* Unmount：Component被从DOM上移除
+	*  componentWillUnmount()
+* 当渲染出现问题时，调用componentDidCatch()函数，进行错误处理
+
+## 3 Todo Example
+### 3.1 依赖的第三方库
+* [Ant Design](https://ant.design/index-cn) (UI设计框架，类似Bootstrap，但Ant Design与React结合的更好)
+`npm install antd --save`
+* [axios](https://github.com/axios/axios) (浏览器端的HTTP库，类似ajax中的$)
+`npm install whatwg-fetch --save`
