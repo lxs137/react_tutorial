@@ -2,6 +2,7 @@
 
 [TOC]
 ## React简介
+* **ReactJS** VS **Agular** VS **Vue**
 * 轻量：MVC中的View层框架
 * 高效：构建虚拟DOM，通过DOM Diff算法，尽可能少的更新界面
 * 方便的JSX语法，不同于Angular与Vue在HTML中添加模板语言，便于记忆，较为灵活
